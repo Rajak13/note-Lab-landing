@@ -1,0 +1,274 @@
+/* ============================================================
+   Features.module.css
+   ============================================================ */
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+/* ── Section shell ── */
+.section {
+  position: relative;
+  background-color: #E8E2D9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-display);
+  /* permanent coral accent line at the top — always visible at all zoom levels */
+  border-top: 2.5px solid var(--color-coral);
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  font-family: var(--font-logo);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1a1a1a;
+  margin: var(--space-16) 0 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Main stage ── */
+.stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+  padding-block: var(--space-24);
+}
+
+/* ── Centre: heading stacks over illustration ── */
+.centre {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* top padding gives room for eyebrow */
+  padding-block-start: var(--space-8);
+}
+
+/* ── Big heading ── */
+.heading {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.85;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.line {
+  display: block;
+  font-family: var(--font-logo);
+  font-size: clamp(4rem, 10.5vw, 8rem);
+  font-weight: 900;
+  color: var(--color-coral);
+  letter-spacing: -0.02em;
+  -webkit-text-stroke: 3px #000;
+  paint-order: stroke fill;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
+}
+
+/* ── Illustration — full width, pulled up behind / overlapping heading ── */
+.illoWrap {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  /* overlap up into the heading */
+  margin-block-start: -3rem;
+}
+
+.illoWrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Side columns — absolutely centred vertically in .stage ── */
+.colLeft,
+.colRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  z-index: 4;
+}
+
+.colLeft  { left:  clamp(var(--space-24), 4vw, var(--space-64)); }
+.colRight { right: clamp(var(--space-24), 4vw, var(--space-64)); }
+
+/* ── Feature item → Card ── */
+.card {
+  width: clamp(160px, 16vw, 210px);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card:nth-child(1) { animation: cardFloat 4s ease-in-out infinite 0ms; }
+  .card:nth-child(2) { animation: cardFloat 4s ease-in-out infinite 700ms; }
+}
+
+/* coral-tinted accent card (matches reference's green cards) */
+.cardAccent {
+  background: var(--color-coral);
+}
+
+/* ── Number badge ── */
+.badge {
+  font-family: var(--font-logo);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-coral);
+  line-height: 1;
+}
+
+.badgeAccent {
+  color: rgba(255,255,255,0.9);
+}
+
+/* ── Icon container ── */
+.iconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(228, 103, 87, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconWrapAccent {
+  background: rgba(255,255,255,0.22);
+}
+
+.iconWrapAccent svg rect,
+.iconWrapAccent svg circle,
+.iconWrapAccent svg line,
+.iconWrapAccent svg path {
+  stroke: #fff;
+  fill: none;
+}
+.iconWrapAccent svg circle[fill="#E46757"] { fill: #fff; stroke: none; }
+.iconWrapAccent svg path[fill="#E46757"]   { fill: #fff; stroke: none; }
+
+/* ── Card title ── */
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.cardTitleAccent { color: #fff; }
+
+/* ── Card description ── */
+.cardDesc {
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  font-weight: 400;
+  color: #444;
+  line-height: 1.55;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.cardDescAccent { color: rgba(255,255,255,0.85); }
+
+/* ── Bottom wave divider ── */
+.waveBottom {
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+  line-height: 0;
+  margin-block-start: var(--space-16);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .colLeft,
+  .colRight {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-16);
+    justify-content: center;
+    padding-inline: var(--space-16);
+  }
+
+  .stage {
+    flex-direction: column;
+    min-height: unset;
+    gap: var(--space-16);
+    padding-block: var(--space-24);
+  }
+
+  .centre {
+    max-width: 100%;
+    order: -1;
+  }
+
+  .illoWrap {
+    margin-block-start: -1.5rem;
+  }
+
+  .card {
+    width: clamp(140px, 40vw, 200px);
+  }
+
+  .line {
+    font-size: clamp(3.5rem, 14vw, 6rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .colLeft,
+  .colRight {
+    gap: var(--space-12);
+  }
+
+  .card {
+    width: clamp(140px, 44vw, 180px);
+    padding: var(--space-12);
+  }
+
+  .line {
+    font-size: clamp(3rem, 16vw, 5rem);
+  }
+
+  .eyebrow {
+    margin-block-start: var(--space-8);
+  }
+}

@@ -1,0 +1,222 @@
+/* ============================================================
+   Contact.module.css
+   ============================================================ */
+
+@keyframes svgFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.section {
+  background-color: #E8E2D9;
+  width: 100%;
+  font-family: var(--font-display);
+  overflow: hidden;
+  border-top: 2.5px solid var(--color-coral);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-32);
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: var(--space-32) var(--space-40) var(--space-48);
+  box-sizing: border-box;
+  min-height: clamp(420px, 48vw, 560px);
+}
+
+/* Illustration — bigger, no max constraint */
+.illoWrap {
+  flex: 0 0 48%;
+  max-width: 560px;
+  min-width: 300px;
+  line-height: 0;
+}
+
+.illoSvg {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .illoSvg {
+    animation: svgFloat 4.5s ease-in-out infinite 0.8s;
+  }
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-16);
+  min-width: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-logo);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.heading {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+}
+
+.headingLine {
+  display: block;
+  font-family: var(--font-logo);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 900;
+  color: var(--color-coral);
+  letter-spacing: -0.02em;
+  -webkit-text-stroke: 2.5px #000;
+  paint-order: stroke fill;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: 380px;
+  text-align: left;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.itemIcon {
+  flex-shrink: 0;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1a1a;
+}
+
+.itemText,
+.itemLink {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.itemLink {
+  border-bottom: 1px solid rgba(26, 26, 26, 0.25);
+  padding-block-end: 1px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.itemLink:hover {
+  color: var(--color-coral);
+  border-bottom-color: var(--color-coral);
+}
+
+.itemLink:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Footer ── */
+.footer {
+  width: 100%;
+  background-color: #1a1a1a;
+  padding: var(--space-16) var(--space-40);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footerBrand {
+  font-family: var(--font-logo);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f5ede8;
+  letter-spacing: -0.01em;
+}
+
+.footerCopy {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(245, 237, 232, 0.55);
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 860px) {
+  .inner {
+    flex-direction: column;
+    padding: var(--space-32) var(--space-24) var(--space-40);
+    min-height: unset;
+    gap: var(--space-24);
+  }
+
+  .illoWrap {
+    flex: unset;
+    max-width: 360px;
+    width: 72vw;
+  }
+
+  .headingLine {
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+    padding: var(--space-12) var(--space-24);
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    padding: var(--space-24) var(--space-16) var(--space-32);
+  }
+
+  .illoWrap {
+    width: 80vw;
+    max-width: 280px;
+  }
+
+  .list {
+    max-width: 100%;
+  }
+
+  .itemText,
+  .itemLink {
+    font-size: 14px;
+  }
+
+  .headingLine {
+    font-size: clamp(2.5rem, 16vw, 4rem);
+  }
+}

@@ -1,0 +1,576 @@
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatNoteLeft {
+  0%, 100% { transform: rotate(-6deg) translateY(0px); }
+  50%       { transform: rotate(-6deg) translateY(-8px); }
+}
+
+@keyframes floatNoteRight {
+  0%, 100% { transform: rotate(5deg) translateY(0px); }
+  50%       { transform: rotate(5deg) translateY(-8px); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes caretBlink {
+  0%, 100% { border-right-color: var(--color-text-secondary); }
+  50%       { border-right-color: transparent; }
+}
+
+.animated { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .animated { animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated { opacity: 1; }
+}
+
+/* ─── Staggered entry delays ───────────────────────────────────
+   Order: nav → logo → curved headline → subline → CTA → left note → illustration → right note
+   ──────────────────────────────────────────────────────────── */
+.delayNav       { animation-delay:   0ms; }
+.delayLogo      { animation-delay: 120ms; }   /* "Organise your experiments" SVG */
+.delaySub       { animation-delay: 280ms; }   /* typewriter subline */
+.delayCta       { animation-delay: 440ms; }   /* CTA buttons */
+.delayNoteLeft  { animation-delay: 580ms; }   /* left sticky note */
+.delayIllo      { animation-delay: 680ms; }   /* scientists illustration */
+.delayNoteRight { animation-delay: 800ms; }   /* right sticky note */
+
+.hero {
+  position: relative;
+  height: 825px;
+  max-height: 825px;
+  background-color: var(--color-coral);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+}
+
+/* Navigation */
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-32) var(--space-40) var(--space-16);
+  flex-shrink: 0;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.navLink {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  position: relative;
+  transition: color 200ms ease, opacity 200ms ease;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  border-radius: 9999px;
+  transition: width 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navLink:hover { opacity: 1; }
+.navLink:hover::after { width: 100%; }
+
+.navLink:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.navLogo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-logo);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 800;
+  color: var(--color-logo);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  -webkit-text-stroke: 3px #000;
+  paint-order: stroke fill;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
+  transition: opacity 200ms ease;
+}
+
+.navLogo:hover { opacity: 0.82; }
+
+.navLogo:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.navLogoDash {
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  margin-inline: 0.06em;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.navBtn {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-btn-border);
+  border-radius: 9999px;
+  padding: 6px 20px;
+  text-decoration: none;
+  transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navBtn:hover {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.92);
+  color: var(--color-coral);
+  transform: translateY(-1px);
+}
+
+.navBtn:active { transform: scale(0.97); }
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+.navBtnPrimary {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.navBtnPrimary:hover {
+  background-color: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-coral);
+}
+
+/* Hero copy */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-block: var(--space-8) var(--space-12);
+  padding-inline: var(--space-24);
+  gap: var(--space-12);
+  flex-shrink: 0;
+}.curvedText {
+  width: min(620px, 92vw);
+  height: auto;
+  overflow: visible;
+  display: block;
+  margin-block-start: 24px;  /* push "Organise your experiments" further down */
+}
+
+.curvedTextEl {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-style: italic;
+  font-weight: 400;
+  fill: var(--color-text-primary);
+  letter-spacing: 0.015em;
+}
+
+.subline {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 60ch;   /* wide enough for the full 84-char string */
+  margin-block-end: var(--space-4);
+  /* subline reveals via typewriter — suppress fadeUp */
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+/* Typewriter */
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  border-right: 2px solid var(--color-text-secondary);
+  vertical-align: bottom;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .typewriter {
+    animation:
+      typing     3.2s steps(84, end) 1000ms both,
+      caretBlink 600ms step-end      1000ms 8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter {
+    width: 100%;
+    border-right: none;
+  }
+}
+
+.ctaGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  margin-block-start: var(--space-4);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-coral);
+  background-color: var(--color-white);
+  border-radius: 9999px;
+  padding: 11px 28px;
+  box-shadow: var(--shadow-btn);
+  text-decoration: none;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  letter-spacing: 0.01em;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+.cta:active { transform: scale(0.98); }
+
+.cta:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+}
+
+.ctaArrow {
+  display: inline-block;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cta:hover .ctaArrow { transform: translateX(4px); }
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 237, 232, 0.35);
+  padding-block-end: 2px;
+  transition: opacity 200ms ease, border-color 200ms ease;
+}
+
+.ctaSecondary:hover {
+  opacity: 0.85;
+  border-bottom-color: var(--color-text-primary);
+}
+
+.ctaSecondary:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.ctaReassurance {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+/* ── Separator between copy and illustration ── */
+.separator {
+  width: min(860px, 88vw);
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.55);
+  border-radius: 9999px;
+  margin-inline: auto;
+  margin-block: var(--space-16) 0;
+  flex-shrink: 0;
+}
+
+/* Stage */
+.stage {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  padding-inline: var(--space-16);
+  padding-block-end: 0;
+  gap: var(--space-16);
+  min-height: 0;
+}
+
+.illustrationWrap {
+  flex: 1;
+  max-width: 1100px;
+  min-width: 0;
+  align-self: flex-end;
+}
+
+.illustrationWrap svg {
+  width: 100%;
+  height: auto;
+  min-height: 380px;
+  max-height: none !important;
+  display: block;
+}
+
+/* Float lives here so the layout box stays static — separator won't jump */
+.floatWrap {
+  width: 100%;
+}
+
+.note {
+  width: clamp(150px, 14vw, 220px);
+  max-width: 220px;
+  flex-shrink: 0;
+  padding: var(--space-16);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-display);
+  align-self: flex-end;
+  margin-block-end: 56px;
+  opacity: 0; /* hidden until fade-in animation fires */
+}
+
+.noteLeft {
+  background-color: var(--color-note-yellow);
+  transform: rotate(-6deg);
+}
+
+.noteRight {
+  background-color: var(--color-note-blue);
+  transform: rotate(5deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .noteLeft {
+    animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both 580ms,
+               floatNoteLeft 4s ease-in-out infinite 1600ms;
+  }
+  .noteRight {
+    animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both 800ms,
+               floatNoteRight 4s ease-in-out infinite 2400ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note { opacity: 1; }
+}
+
+.noteTitle {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-coral-dark);
+  margin-block-end: var(--space-8);
+}
+
+.noteBody {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #3a3a3a;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.noteItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.noteCheck {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-block-start: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noteCheckDone {
+  background-color: var(--color-coral);
+}
+
+.noteCheckDone::after {
+  content: '';
+  width: 4px;
+  height: 2.5px;
+  border-left: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+  transform: rotate(-45deg) translateY(-1px);
+  display: block;
+}
+
+.noteCheckPending {
+  border: 1.5px solid #bbb;
+}
+
+.noteDate {
+  font-size: 0.625rem;
+  color: #999;
+  margin-block-start: var(--space-8);
+}
+
+/* ── Wave divider — replaces white bench ── */
+.waveDivider {
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+  line-height: 0;
+  /* pull up slightly so no gap between coral hero and wave */
+  margin-block-start: -2px;
+}
+
+@media (max-width: 900px) {
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-12);
+    padding: var(--space-12) var(--space-20);
+  }
+
+  .navLogo {
+    position: static;
+    transform: none;
+    order: -1;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .navLinks,
+  .navActions {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 860px) {
+  .note { display: none; }
+  .separator { display: none; }
+}
+
+@media (max-width: 640px) {
+  /* Make hero height auto on mobile */
+  .hero {
+    height: auto;
+    max-height: none;
+    min-height: 100svh;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .navLinks {
+    gap: var(--space-16);
+  }
+
+  /* Typewriter text wraps on narrow screens */
+  .subline {
+    max-width: 90vw;
+  }
+
+  .typewriter {
+    white-space: normal;
+    width: 100% !important;
+    border-right: none;
+    animation: none !important;
+  }
+
+  .illustrationWrap svg {
+    min-height: unset;
+  }
+
+  .curvedText {
+    width: min(320px, 88vw);
+  }
+}
+
+@media (max-width: 420px) {
+  .navLinks {
+    gap: var(--space-8);
+    font-size: 12px;
+  }
+
+  .navBtn {
+    padding: 5px 14px;
+    font-size: 12px;
+  }
+
+  .cta {
+    font-size: 13px;
+    padding: 10px 20px;
+  }
+}
