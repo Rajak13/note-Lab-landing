@@ -46,8 +46,7 @@
 
 .hero {
   position: relative;
-  height: 825px;
-  max-height: 825px;
+  min-height: clamp(700px, 90vh, 900px);
   background-color: var(--color-coral);
   display: flex;
   flex-direction: column;
@@ -153,42 +152,6 @@
   gap: var(--space-12);
 }
 
-.navBtn {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-btn-border);
-  border-radius: 9999px;
-  padding: 6px 20px;
-  text-decoration: none;
-  transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.navBtn:hover {
-  background-color: rgba(255, 255, 255, 0.92);
-  border-color: rgba(255, 255, 255, 0.92);
-  color: var(--color-coral);
-  transform: translateY(-1px);
-}
-
-.navBtn:active { transform: scale(0.97); }
-
-.navBtn:focus-visible {
-  outline: 2px solid var(--color-white);
-  outline-offset: 3px;
-}
-
-.navBtnPrimary {
-  background-color: rgba(255, 255, 255, 0.14);
-}
-
-.navBtnPrimary:hover {
-  background-color: var(--color-white);
-  border-color: var(--color-white);
-  color: var(--color-coral);
-}
-
 /* Hero copy */
 .content {
   display: flex;
@@ -269,67 +232,6 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-16);
-}
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-8);
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-coral);
-  background-color: var(--color-white);
-  border-radius: 9999px;
-  padding: 11px 28px;
-  box-shadow: var(--shadow-btn);
-  text-decoration: none;
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
-  letter-spacing: 0.01em;
-}
-
-.cta:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-btn-hover);
-}
-
-.cta:active { transform: scale(0.98); }
-
-.cta:focus-visible {
-  outline: 2px solid var(--color-white);
-  outline-offset: 4px;
-}
-
-.ctaArrow {
-  display: inline-block;
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cta:hover .ctaArrow { transform: translateX(4px); }
-
-.ctaSecondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--color-text-primary);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(245, 237, 232, 0.35);
-  padding-block-end: 2px;
-  transition: opacity 200ms ease, border-color 200ms ease;
-}
-
-.ctaSecondary:hover {
-  opacity: 0.85;
-  border-bottom-color: var(--color-text-primary);
-}
-
-.ctaSecondary:focus-visible {
-  outline: 2px solid var(--color-white);
-  outline-offset: 4px;
-  border-radius: 4px;
 }
 
 .ctaReassurance {
@@ -520,11 +422,9 @@
 }
 
 @media (max-width: 640px) {
-  /* Make hero height auto on mobile */
+  /* Make hero height auto on mobile so it fits content */
   .hero {
-    height: auto;
-    max-height: none;
-    min-height: 100svh;
+    min-height: unset;
   }
 
   .ctaRow {
@@ -549,6 +449,12 @@
     animation: none !important;
   }
 
+  /* Remove the flex: 1 stretch so stage hugs the illustration */
+  .stage {
+    flex: 0 0 auto;
+    padding-block-start: var(--space-16);
+  }
+
   .illustrationWrap svg {
     min-height: unset;
   }
@@ -562,15 +468,5 @@
   .navLinks {
     gap: var(--space-8);
     font-size: 12px;
-  }
-
-  .navBtn {
-    padding: 5px 14px;
-    font-size: 12px;
-  }
-
-  .cta {
-    font-size: 13px;
-    padding: 10px 20px;
   }
 }

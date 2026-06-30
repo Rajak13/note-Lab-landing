@@ -1,0 +1,170 @@
+/* ============================================================
+   buttons.module.css — shared button variants
+   Import alongside a component's own module, e.g.:
+     import s  from './Hero.module.css'
+     import btn from '../../styles/buttons.module.css'
+   ============================================================ */
+
+/* ─── Base reset shared by all variants ────────────────────── */
+.base {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── Variant 1: Primary ────────────────────────────────────
+   White pill, coral text, drop-shadow. Matches .cta in Hero.
+   ─────────────────────────────────────────────────────────── */
+.primary {
+  composes: base;
+  gap: var(--space-8);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-coral);
+  background-color: var(--color-white);
+  border-radius: var(--radius-full);
+  padding: 11px 28px;
+  box-shadow: var(--shadow-btn);
+  letter-spacing: 0.01em;
+  transition:
+    transform  220ms var(--ease-out-expo),
+    box-shadow 220ms var(--ease-out-expo);
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+.primary:active {
+  transform: scale(0.98);
+}
+
+.primary:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+}
+
+/* Arrow child — animated on parent hover */
+.primaryArrow {
+  display: inline-block;
+  transition: transform 220ms var(--ease-out-expo);
+}
+
+.primary:hover .primaryArrow {
+  transform: translateX(4px);
+}
+
+/* ─── Variant 2: Outlined ───────────────────────────────────
+   Transparent fill, white border pill. Matches .navBtn.
+   ─────────────────────────────────────────────────────────── */
+.outlined {
+  composes: base;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-btn-border);
+  border-radius: var(--radius-full);
+  padding: 6px 20px;
+  transition:
+    background-color 220ms ease,
+    border-color     220ms ease,
+    color            220ms ease,
+    transform        220ms var(--ease-out-expo);
+}
+
+.outlined:hover {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.92);
+  color: var(--color-coral);
+  transform: translateY(-1px);
+}
+
+.outlined:active {
+  transform: scale(0.97);
+}
+
+.outlined:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+/* Modifier: semi-filled background (Register button). */
+.outlinedFilled {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.outlinedFilled:hover {
+  background-color: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-coral);
+}
+
+/* ─── Variant 3: Ghost / text ───────────────────────────────
+   No border/background, underline only. Matches .ctaSecondary.
+   ─────────────────────────────────────────────────────────── */
+.ghost {
+  composes: base;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgba(245, 237, 232, 0.35);
+  padding-block-end: 2px;
+  border-radius: 0;
+  transition:
+    opacity      200ms ease,
+    border-color 200ms ease;
+}
+
+.ghost:hover {
+  opacity: 0.85;
+  border-bottom-color: var(--color-text-primary);
+}
+
+.ghost:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Size modifier: compact (used at ≤ 420 px) ─────────────
+   Apply alongside a variant class, e.g. btn.primary + btn.sm
+   ─────────────────────────────────────────────────────────── */
+.sm {
+  font-size: 13px;
+  padding: 10px 20px;
+}
+
+.smOutlined {
+  font-size: 12px;
+  padding: 5px 14px;
+}
+
+/* ─── Context modifier: on-light background ────────────────
+   Use with .outlined when the button sits on a light/beige
+   surface (not the coral hero). Swaps colors to dark text
+   and a coral border that fills on hover.
+   e.g. className={`${btn.outlined} ${btn.onLight}`}
+   ─────────────────────────────────────────────────────────── */
+.onLight {
+  color: #1a1a1a;
+  border-color: var(--color-coral);
+}
+
+.onLight:hover {
+  background-color: var(--color-coral);
+  border-color: var(--color-coral);
+  color: var(--color-white);
+}
+
+.onLight:focus-visible {
+  outline-color: var(--color-coral);
+}

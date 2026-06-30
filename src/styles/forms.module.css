@@ -1,0 +1,261 @@
+/* ============================================================
+   forms.module.css — shared form element styles for auth pages.
+   Uses only tokens from tokens.css.
+   ============================================================ */
+
+/* ── Page heading ("Log In" / "Create Account") ────────────── */
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ── Field group: label + input stacked ────────────────────── */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: #3a3a3a;
+  letter-spacing: 0.02em;
+}
+
+.input {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 400;
+  color: #1a1a1a;
+  background-color: var(--color-white);
+  border: 1.5px solid #d4d0cb;
+  border-radius: var(--radius-md);
+  padding: 10px var(--space-16);
+  width: 100%;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #b0aba4;
+  font-weight: 400;
+}
+
+.input:focus {
+  border-color: var(--color-coral);
+  box-shadow: 0 0 0 3px rgba(228, 103, 87, 0.14);
+}
+
+.input:focus-visible {
+  border-color: var(--color-coral);
+  box-shadow: 0 0 0 3px rgba(228, 103, 87, 0.14);
+}
+
+/* ── Input with leading icon ───────────────────────────────── */
+/* Wraps a single input and its left-side icon.
+   .passwordWrap can also use this class since it extends the
+   same pattern (left icon + right toggle button).             */
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* The leading icon — absolutely pinned to the left edge */
+.inputIcon {
+  position: absolute;
+  left: var(--space-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b0aba4;
+  pointer-events: none;           /* never intercepts clicks/focus */
+  transition: color 180ms ease;
+  z-index: 1;
+}
+
+/* When the sibling input is focused, colour the icon coral */
+.inputWrap:focus-within .inputIcon {
+  color: var(--color-coral);
+}
+
+/* All inputs inside a wrap get left padding to clear the icon */
+.inputWrap .input {
+  padding-inline-start: 40px;
+}
+
+/* Password field: also needs right padding for the eye toggle */
+.passwordWrap .input {
+  padding-inline-end: 44px;
+}
+
+
+
+.passwordToggle {
+  position: absolute;
+  right: var(--space-12);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a857e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: color 180ms ease;
+}
+
+.passwordToggle:hover {
+  color: var(--color-coral);
+}
+
+.passwordToggle:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 2px;
+}
+
+/* ── Checkbox row ───────────────────────────────────────────── */
+.checkRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: #3a3a3a;
+  user-select: none;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #c4bfb8;
+  border-radius: var(--radius-sm);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  background-color: var(--color-white);
+  transition: background-color 180ms ease, border-color 180ms ease;
+  position: relative;
+}
+
+.checkbox:checked {
+  background-color: var(--color-coral);
+  border-color: var(--color-coral);
+}
+
+.checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1.5px;
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(40deg);
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 2px;
+}
+
+/* ── Small text links (Reset password, Sign up, Log in) ────── */
+.textLink {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-coral);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease;
+}
+
+.textLink:hover {
+  border-bottom-color: var(--color-coral);
+}
+
+.textLink:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Primary submit button — full-width coral fill ─────────── */
+/* Overrides buttons.module.css .primary for on-light context  */
+.submitBtn {
+  width: 100%;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-white);
+  background-color: var(--color-coral);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 13px var(--space-32);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition:
+    background-color 220ms ease,
+    transform        220ms var(--ease-out-expo),
+    box-shadow       220ms var(--ease-out-expo);
+  box-shadow: var(--shadow-btn);
+}
+
+.submitBtn:hover {
+  background-color: var(--color-coral-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+.submitBtn:active {
+  transform: scale(0.98);
+}
+
+.submitBtn:focus-visible {
+  outline: 2px solid var(--color-coral-dark);
+  outline-offset: 4px;
+}
+
+/* ── Footer line ("Don't have an account?") ────────────────── */
+.footer {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: #6b6375;
+  text-align: center;
+  margin-block-start: var(--space-8);
+}
+
+/* ── Form fields stack ──────────────────────────────────────── */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+/* ── Error message under a field ───────────────────────────── */
+.fieldError {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--color-coral-dark);
+  margin-block-start: var(--space-4);
+}

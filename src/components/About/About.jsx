@@ -1,5 +1,8 @@
 import AboutSvg from '../../assets/about.svg?react'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import s from './About.module.css'
+import btn from '../../styles/buttons.module.css'
+import anim from '../../styles/animations.module.css'
 
 function IconMission() {
   return (
@@ -37,36 +40,77 @@ function AboutCard({ num, icon, title, desc, accent }) {
 }
 
 export default function AboutSection() {
+  const heading  = useScrollReveal({ threshold: 0.15, rootMargin: '-50px' })
+  const card1    = useScrollReveal({ threshold: 0.15, rootMargin: '-50px' })
+  const card2    = useScrollReveal({ threshold: 0.15, rootMargin: '-50px' })
+  const cta      = useScrollReveal({ threshold: 0.15, rootMargin: '-50px' })
+  const illo     = useScrollReveal({ threshold: 0.1,  rootMargin: '-50px' })
+
   return (
     <section className={s.section} id="about" aria-labelledby="about-heading">
       <div className={s.inner}>
         <div className={s.left}>
-          <p className={s.eyebrow}>note – Lab</p>
 
-          <h2 className={s.heading} id="about-heading">
+          <h2
+            ref={heading.ref}
+            className={`${s.heading} ${heading.isVisible ? anim.revealVisible : anim.reveal}`}
+            id="about-heading"
+          >
             <span className={s.headingLine}>ABOUT</span>
             <span className={s.headingLine}>US</span>
           </h2>
 
           <div className={s.cards}>
-            <AboutCard
-              num="01"
-              icon={<IconMission />}
-              title="Mission"
-              desc="To organise research that addresses global scientific questions — making every experiment traceable, reproducible, and shareable."
-            />
-            <AboutCard
-              num="02"
-              icon={<IconVision />}
-              title="Vision"
-              desc="A world where no research goes to waste — where every discovery, no matter how small, builds on the last."
-              accent
-            />
+            {/* Card 1 — Mission, no stagger delay */}
+            <div
+              ref={card1.ref}
+              className={card1.isVisible ? anim.revealVisible : anim.reveal}
+            >
+              <AboutCard
+                num="01"
+                icon={<IconMission />}
+                title="Mission"
+                desc="To organise research that addresses global scientific questions — making every experiment traceable, reproducible, and shareable."
+              />
+            </div>
+
+            {/* Card 2 — Vision, 80 ms after card 1 */}
+            <div
+              ref={card2.ref}
+              className={card2.isVisible ? anim.revealVisible : anim.reveal}
+              style={{ animationDelay: '80ms' }}
+            >
+              <AboutCard
+                num="02"
+                icon={<IconVision />}
+                title="Vision"
+                desc="A world where no research goes to waste — where every discovery, no matter how small, builds on the last."
+                accent
+              />
+            </div>
           </div>
+
+          {/* CTA — 160 ms after heading */}
+          <a
+            ref={cta.ref}
+            href="#contact"
+            className={`${btn.ghost} ${cta.isVisible ? anim.revealVisible : anim.reveal}`}
+            style={{ animationDelay: '160ms' }}
+          >
+            Get in touch
+            <span aria-hidden="true">→</span>
+          </a>
+
         </div>
       </div>
 
-      <div className={s.illoWrap} aria-hidden="true">
+      {/* Illustration */}
+      <div
+        ref={illo.ref}
+        className={`${s.illoWrap} ${illo.isVisible ? anim.revealVisible : anim.reveal}`}
+        style={{ animationDelay: '80ms' }}
+        aria-hidden="true"
+      >
         <AboutSvg focusable="false" className={s.illoSvg} />
       </div>
 

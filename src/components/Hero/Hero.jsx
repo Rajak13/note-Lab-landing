@@ -1,6 +1,8 @@
 import { useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import Scientists from '../../assets/scientists.svg?react'
 import s from './Hero.module.css'
+import btn from '../../styles/buttons.module.css'
 
 function CurvedHeadline() {
   return (
@@ -112,8 +114,8 @@ export default function Hero() {
           </a>
 
           <div className={s.navActions}>
-            <a href="#login" className={s.navBtn}>Login</a>
-            <a href="#register" className={`${s.navBtn} ${s.navBtnPrimary}`}>Register</a>
+            <Link to="/login"    className={btn.outlined}>Login</Link>
+            <Link to="/register" className={`${btn.outlined} ${btn.outlinedFilled}`}>Register</Link>
           </div>
         </nav>
 
@@ -132,13 +134,13 @@ export default function Hero() {
             <div className={s.ctaRow}>
               <a
                 href="#get-started"
-                className={s.cta}
+                className={btn.primary}
                 aria-label="Start your first experiment with note-Lab"
               >
                 Start your first experiment
-                <span className={s.ctaArrow} aria-hidden="true">→</span>
+                <span className={btn.primaryArrow} aria-hidden="true">→</span>
               </a>
-              <a href="#how-it-works" className={s.ctaSecondary}>
+              <a href="#how-it-works" className={btn.ghost}>
                 See how it works
                 <span aria-hidden="true">→</span>
               </a>

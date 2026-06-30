@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow: clip;
   width: 100%;
   box-sizing: border-box;
   font-family: var(--font-display);
@@ -33,6 +33,20 @@
   text-align: center;
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+}
+
+/* Coral dot punctuation before eyebrow text */
+.eyebrowDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-coral);
+  flex-shrink: 0;
 }
 
 /* ── Main stage ── */
@@ -205,6 +219,15 @@
 }
 
 .cardDescAccent { color: rgba(255,255,255,0.85); }
+
+/* ── CTA below stage ── */
+.ctaWrap {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--space-8) var(--space-32);
+  position: relative;
+  z-index: 2;
+}
 
 /* ── Bottom wave divider ── */
 .waveBottom {

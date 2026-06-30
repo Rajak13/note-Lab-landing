@@ -1,5 +1,8 @@
 import FeaturesSvg from '../../assets/features.svg?react'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import s from './Features.module.css'
+import btn from '../../styles/buttons.module.css'
+import anim from '../../styles/animations.module.css'
 
 /* ── Inline SVG icons (simple, lab-themed) ── */
 function IconLog() {
@@ -101,44 +104,88 @@ function Card({ num, icon, title, desc, accent }) {
   )
 }
 
+/* Wrapper that owns the reveal ref + stagger delay for each card */
+function RevealCard({ feature, accent, staggerIndex }) {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.15, rootMargin: '-50px' })
+  return (
+    <div
+      ref={ref}
+      className={isVisible ? anim.revealVisible : anim.reveal}
+      style={{ animationDelay: `${staggerIndex * 80}ms` }}
+    >
+      <Card {...feature} accent={accent} />
+    </div>
+  )
+}
+
 export default function FeaturesSection() {
+  const heading  = useScrollReveal({ threshold: 0.15, rootMargin: '-50px' })
+  const illo     = useScrollReveal({ threshold: 0.1,  rootMargin: '-50px' })
+  const cta      = useScrollReveal({ threshold: 0.3,  rootMargin: '-50px' })
+
+  // Ordered stagger: 01 (left), 02 (right), 03 (left), 04 (right)
+  const leftFeatures  = features.filter(f => f.side === 'left')   // 01, 03
+  const rightFeatures = features.filter(f => f.side === 'right')  // 02, 04
+
   return (
     <section className={s.section} id="features" aria-labelledby="features-heading">
-
-      {/* eyebrow */}
-      <p className={s.eyebrow}>note– Lab</p>
 
       {/* main stage */}
       <div className={s.stage}>
 
-        {/* left cards */}
+        {/* left cards — stagger indices 0 and 2 */}
         <div className={s.colLeft}>
-          {features.filter(f => f.side === 'left').map((f, i) => (
-            <Card key={f.num} {...f} accent={i === 1} />
+          {leftFeatures.map((f, i) => (
+            <RevealCard key={f.num} feature={f} accent={i === 1} staggerIndex={i * 2} />
           ))}
         </div>
 
         {/* centre: heading + illustration */}
         <div className={s.centre}>
-          <h2 className={s.heading} id="features-heading">
+          <p className={s.eyebrow}>
+            <span aria-hidden="true" className={s.eyebrowDot} />
+            What we offer
+          </p>
+          <h2
+            ref={heading.ref}
+            className={`${s.heading} ${heading.isVisible ? anim.revealVisible : anim.reveal}`}
+            id="features-heading"
+          >
             <span className={s.line}>OUR</span>
             <span className={s.line}>FEATURES</span>
           </h2>
-          <div className={s.illoWrap} aria-hidden="true">
+          <div
+            ref={illo.ref}
+            className={`${s.illoWrap} ${illo.isVisible ? anim.revealVisible : anim.reveal}`}
+            style={{ animationDelay: '160ms' }}
+            aria-hidden="true"
+          >
             <FeaturesSvg focusable="false" />
           </div>
         </div>
 
-        {/* right cards */}
+        {/* right cards — stagger indices 1 and 3 */}
         <div className={s.colRight}>
-          {features.filter(f => f.side === 'right').map((f, i) => (
-            <Card key={f.num} {...f} accent={i === 0} />
+          {rightFeatures.map((f, i) => (
+            <RevealCard key={f.num} feature={f} accent={i === 0} staggerIndex={i * 2 + 1} />
           ))}
         </div>
 
       </div>
 
-      {/* Bottom wave divider — beige → coral for the About section */}
+      {/* CTA */}
+      <div
+        ref={cta.ref}
+        className={`${s.ctaWrap} ${cta.isVisible ? anim.revealVisible : anim.reveal}`}
+        style={{ animationDelay: '320ms' }}
+      >
+        <a href="#about" className={`${btn.outlined} ${btn.onLight}`}>
+          See all features
+          <span aria-hidden="true"> →</span>
+        </a>
+      </div>
+
+      {/* Bottom wave divider */}
       <svg
         className={s.waveBottom}
         xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +193,6 @@ export default function FeaturesSection() {
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        {/* thin white line riding the wave crest */}
         <path
           d="M0,40 C240,80 480,0 720,32 C960,64 1200,10 1440,40"
           fill="none"

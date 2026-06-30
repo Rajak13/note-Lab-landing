@@ -1,0 +1,95 @@
+/* ============================================================
+   AuthPage.module.css
+   Animation and style rules specific to the AuthPage controller.
+   ============================================================ */
+
+/* ── Form content crossfade ────────────────────────────────── */
+/* Wraps the entire form (heading + fields + footer).
+   Fades out before the layout flips, fades back in after.     */
+.formContent {
+  display: contents; /* transparent wrapper — doesn't affect flex layout */
+}
+
+/* Separate animating wrapper used when we need opacity/transform */
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  width: 100%;
+  transition:
+    opacity   260ms ease,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.formHidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.formVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Switch link styled as an inline text button ───────────── */
+/* Used for "Sign Up" / "Log in" in the footer paragraph.      */
+.switchBtn {
+  display: inline;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-coral);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease;
+  line-height: inherit;
+}
+
+.switchBtn:hover {
+  border-bottom-color: var(--color-coral);
+}
+
+.switchBtn:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Reset Password text button ─────────────────────────────── */
+.textBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-coral);
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease;
+}
+
+.textBtn:hover {
+  border-bottom-color: var(--color-coral);
+}
+
+.textBtn:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .formContent {
+    transition: none;
+  }
+  .formHidden {
+    transform: none;
+  }
+}
