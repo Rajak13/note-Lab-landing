@@ -1,0 +1,28 @@
+/* ============================================================
+   App.css — page-level shell styles
+   ============================================================ */
+
+/*
+ * .pageFrame
+ * A fixed inset border that frames the entire landing page.
+ * Uses pointer-events:none so it never blocks scrolling or clicks.
+ * Matches the coral outline on AuthLayout for visual consistency.
+ *
+ * 10px width is lighter than AuthLayout's 14px — landing page
+ * content shouldn't feel caged the way a full-screen modal does.
+ */
+.pageFrame {
+  position: fixed;
+  inset: 0;
+  outline: 10px solid var(--color-coral);
+  outline-offset: -10px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@media (max-width: 480px) {
+  .pageFrame {
+    outline-width: 6px;
+    outline-offset: -6px;
+  }
+}

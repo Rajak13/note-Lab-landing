@@ -1,0 +1,20 @@
+# robots.txt — Crawling and Indexing Rules for NoteLab
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /notebook/
+
+# Allow major AI search and research assistants
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Sitemap
+Sitemap: https://notelab.app/sitemap.xml

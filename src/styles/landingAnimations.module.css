@@ -1,0 +1,23 @@
+.notebookAnchor {
+  transform-origin: center bottom;
+}
+
+.atomDrift {
+  animation: atomDrift 9s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes atomDrift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atomDrift {
+    animation: none;
+  }
+}

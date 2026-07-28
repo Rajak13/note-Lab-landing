@@ -1,0 +1,100 @@
+:root {
+  /* Palette — Landing Page Exact Identity */
+  --color-coral:          #E46757;
+  --color-coral-dark:     #C94A3C;
+  --color-coral-deep:     #A83A2E;
+  --color-coral-soft:     rgba(228, 103, 87, 0.10);
+  --color-coral-glow:     rgba(228, 103, 87, 0.20);
+  --color-coral-text:     #C94A3C;
+  
+  --color-white:          #FFFFFF;
+  --color-beige:          #FAF7F2;
+  --color-warm-white:     #F4F1EA;
+  --color-warm-white-60:  rgba(244, 241, 234, 0.6);
+  --color-note-yellow:    #FFFDE7;
+  --color-note-blue:      #EFF6FF;
+  
+  /* Text & Surfaces - Landing Page Warm Tone */
+  --bg-app:               #F4F1EA;
+  --bg-card:              #FFFFFF;
+  --bg-card-hover:        #FAF8F5;
+  --bg-glass:             rgba(244, 241, 234, 0.85);
+  --bg-paper:             #FFFEF9;
+  --border-glass:         rgba(228, 103, 87, 0.15);
+  --border-subtle:        rgba(44, 36, 32, 0.08);
+  --border-card:          rgba(228, 103, 87, 0.10);
+  
+  --color-text-primary:   #1C1917;
+  --color-text-secondary: #44403C;
+  --color-text-dark:      #2C2420;
+  --color-text-muted:     #67615A;
+  --color-logo:           #E46757;
+  
+  --color-accent-gold:    #D97706;
+  --color-accent-teal:    #0D9488;
+  --color-accent-green:   #059669;
+  --color-accent-amber:   #D97706;
+
+  /* Typography: Playfair for editorial moments, Inter for UI */
+  --font-display:   'Playfair Display', Georgia, serif;
+  --font-logo:      'Arial Nova', 'Arial', sans-serif;
+  --font-ui:        'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing */
+  --space-4:   0.25rem;
+  --space-8:   0.5rem;
+  --space-12:  0.75rem;
+  --space-16:  1rem;
+  --space-20:  1.25rem;
+  --space-24:  1.5rem;
+  --space-32:  2rem;
+  --space-40:  2.5rem;
+  --space-48:  3rem;
+  --space-64:  4rem;
+
+  /* Motion */
+  --ease-out-expo:  cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast:  200ms;
+  --duration-base:  300ms;
+
+  /* Radius — intentional variation */
+  --radius-xs:      6px;
+  --radius-sm:      10px;
+  --radius-md:      14px;
+  --radius-lg:      20px;
+  --radius-xl:      24px;
+  --radius-hero:    28px;
+  --radius-notebook: 14px;
+  --radius-full:    9999px;
+
+  /* Shadows */
+  --shadow-sm:        0 2px 8px rgba(0, 0, 0, 0.03);
+  --shadow-card:      0 8px 24px rgba(44, 36, 32, 0.05);
+  --shadow-card-hover: 0 16px 36px rgba(44, 36, 32, 0.08);
+  --shadow-hero:      0 24px 48px rgba(44, 36, 32, 0.07);
+  --shadow-floating:  0 20px 40px rgba(44, 36, 32, 0.12);
+  
+  --backdrop-blur:    blur(16px) saturate(180%);
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --bg-app:               #0E1117;
+  --bg-card:              #161B26;
+  --bg-card-hover:        #1F2533;
+  --bg-glass:             rgba(22, 27, 38, 0.88);
+  --bg-paper:             #1A1F2B;
+  --border-glass:         rgba(255, 255, 255, 0.08);
+  --border-subtle:        rgba(255, 255, 255, 0.06);
+  --border-card:          rgba(255, 255, 255, 0.07);
+  
+  --color-text-primary:   #F3F4F6;
+  --color-text-secondary: #9CA3AF;
+  --color-text-dark:      #F9FAFB;
+  --color-text-muted:     #6B7280;
+  
+  --shadow-card:      0 10px 32px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 18px 48px rgba(0, 0, 0, 0.55);
+  --shadow-hero:      0 24px 48px rgba(0, 0, 0, 0.35);
+}

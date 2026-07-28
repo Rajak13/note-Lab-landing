@@ -1,0 +1,416 @@
+/* ══════════════════════════════════════════════════════
+   DiagramCanvas.module.css — Professional Draw.io Layout
+   ══════════════════════════════════════════════════════ */
+
+.drawioLayout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 680px;
+  background: #F8F6F1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(44, 36, 32, 0.12);
+  box-shadow: 0 4px 16px rgba(44, 36, 32, 0.04);
+}
+
+/* ── Top Header Toolbar ── */
+.drawioHeader {
+  height: 44px;
+  background: #FFFDF8;
+  border-bottom: 1px solid rgba(44, 36, 32, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  z-index: 10;
+}
+
+.headerToolsLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.headerToolBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text-secondary, #57534E);
+  font-family: var(--font-ui);
+  font-size: 0.78125rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.headerToolBtn:hover {
+  background: rgba(44, 36, 32, 0.05);
+  color: var(--color-text-dark, #2C2420);
+}
+
+.headerToolBtnActive {
+  background: rgba(228, 103, 87, 0.12);
+  border-color: rgba(228, 103, 87, 0.3);
+  color: var(--color-coral-dark, #C94A3C);
+  font-weight: 600;
+}
+
+.headerToolBtnDanger:hover {
+  background: rgba(201, 74, 60, 0.1);
+  color: #C94A3C;
+}
+
+.headerIconBtn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted, #78716C);
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerIconBtn:hover {
+  background: rgba(44, 36, 32, 0.06);
+  color: var(--color-text-dark);
+}
+
+.zoomValue {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  min-width: 36px;
+  text-align: center;
+}
+
+.headerDivider {
+  width: 1px;
+  height: 18px;
+  background: rgba(44, 36, 32, 0.12);
+  margin: 0 4px;
+}
+
+.headerPresetsRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.presetLabel {
+  font-family: var(--font-ui);
+  font-size: 0.71875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-coral-dark, #C94A3C);
+  text-transform: uppercase;
+}
+
+.headerPresetChip {
+  background: rgba(228, 103, 87, 0.08);
+  border: 1px dashed rgba(228, 103, 87, 0.3);
+  color: var(--color-coral-dark, #C94A3C);
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.headerPresetChip:hover {
+  background: rgba(228, 103, 87, 0.16);
+  border-style: solid;
+}
+
+/* ── Workbench Split Layout ── */
+.drawioWorkbench {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Left Library Sidebar ── */
+.drawioLibrarySidebar {
+  width: 235px;
+  background: #FFFDF8;
+  border-right: 1px solid rgba(44, 36, 32, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.libraryTitle {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted, #78716C);
+  text-transform: uppercase;
+  padding: 12px 14px 8px;
+  border-bottom: 1px solid rgba(44, 36, 32, 0.06);
+}
+
+.accordionGroup {
+  border-bottom: 1px solid rgba(44, 36, 32, 0.06);
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: transparent;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 0.78125rem;
+  font-weight: 600;
+  color: var(--color-text-dark, #2C2420);
+  cursor: pointer;
+  text-align: left;
+  transition: background 120ms ease;
+}
+
+.accordionHeader:hover {
+  background: rgba(44, 36, 32, 0.03);
+}
+
+.accordionChevron {
+  display: flex;
+  align-items: center;
+  transition: transform 140ms ease;
+}
+
+.accordionChevronOpen {
+  transform: rotate(180deg);
+}
+
+.accordionTitle {
+  flex: 1;
+}
+
+.accordionCount {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  background: rgba(44, 36, 32, 0.06);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+/* Thumbnail Grid for shapes */
+.thumbnailGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 8px;
+  background: rgba(44, 36, 32, 0.02);
+}
+
+.thumbCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(44, 36, 32, 0.12);
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.thumbCard:hover {
+  border-color: var(--color-coral, #E46757);
+  box-shadow: 0 2px 8px rgba(228, 103, 87, 0.15);
+  transform: translateY(-1px);
+}
+
+.thumbCardActive {
+  border-color: var(--color-coral, #E46757);
+  background: rgba(228, 103, 87, 0.08);
+}
+
+.thumbSvgContainer {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbSvg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumbLabel {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-dark, #2C2420);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+/* ── Center SVG Canvas Area ── */
+.drawioCanvasArea {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #F8F6F1;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Right Format Panel ── */
+.drawioFormatPanel {
+  width: 230px;
+  background: #FFFDF8;
+  border-left: 1px solid rgba(44, 36, 32, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.formatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(44, 36, 32, 0.08);
+  padding-bottom: 8px;
+}
+
+.formatTitle {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted, #78716C);
+  text-transform: uppercase;
+}
+
+.formatCloseBtn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.formatSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formatLabel {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.formatInput {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  border: 1px solid rgba(44, 36, 32, 0.16);
+  border-radius: 6px;
+  padding: 6px 9px;
+  background: #FFFFFF;
+  outline: none;
+}
+
+.formatInput:focus {
+  border-color: var(--color-coral, #E46757);
+}
+
+.formatRange {
+  width: 100%;
+  accent-color: var(--color-coral, #E46757);
+}
+
+.colorPaletteGrid {
+  display: flex;
+  gap: 6px;
+}
+
+.colorCircle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+
+.colorCircle:hover {
+  transform: scale(1.2);
+}
+
+.colorCircleActive {
+  outline: 2px solid var(--color-coral-dark, #C94A3C);
+  outline-offset: 1px;
+}
+
+.igniteBtn {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+  color: #DC2626;
+  font-family: var(--font-ui);
+  font-size: 0.78125rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.igniteBtnActive {
+  background: #EF4444;
+  color: #FFFFFF;
+  border-color: #DC2626;
+}
+
+.formatDeleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(201, 74, 60, 0.3);
+  color: #C94A3C;
+  font-family: var(--font-ui);
+  font-size: 0.78125rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 140ms ease;
+  width: 100%;
+}
+
+.formatDeleteBtn:hover {
+  background: rgba(201, 74, 60, 0.08);
+}

@@ -1,0 +1,92 @@
+.floatSlow {
+  animation: floatSlow 7s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+}
+
+.floatMedium {
+  animation: floatMedium 5s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+}
+
+.floatFast {
+  animation: floatFast 4s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+}
+
+.steamRise {
+  animation: steamRise 3s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.stickyWobble {
+  animation: stickyWobble 5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.bookmarkSway {
+  animation: bookmarkSway 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.notebookScene {
+  /* Notebook is anchored to desk — no float */
+}
+
+.microscopeTilt {
+  animation: microscopeTilt 8s ease-in-out infinite alternate;
+  transform-origin: 720px 420px;
+}
+
+@keyframes microscopeTilt {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(2deg); }
+}
+
+@keyframes floatSlow {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+@keyframes floatMedium {
+  from { transform: translateY(0); }
+  to { transform: translateY(-12px); }
+}
+
+@keyframes floatFast {
+  from { transform: translateY(0); }
+  to { transform: translateY(-14px); }
+}
+
+@keyframes steamRise {
+  0%, 100% { opacity: 0.2; transform: translateY(0); }
+  50% { opacity: 0.55; transform: translateY(-8px); }
+}
+
+@keyframes stickyWobble {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(2deg) translateY(-4px); }
+}
+
+@keyframes bookmarkSway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(4deg); }
+}
+
+@keyframes microscopeTilt {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(2deg); }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatSlow,
+  .floatMedium,
+  .floatFast,
+  .steamRise,
+  .stickyWobble,
+  .bookmarkSway,
+  .microscopeTilt {
+    animation: none;
+  }
+}

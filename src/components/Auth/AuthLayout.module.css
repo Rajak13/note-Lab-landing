@@ -1,0 +1,481 @@
+/* ============================================================
+   AuthLayout.module.css
+   Full-viewport split-screen auth shell.
+
+   Structure:
+     .frame          — coral border inset from viewport edges
+       .inner         — flex row (or reversed): card + panel
+         .card        — white form container
+         .panel       — dotted illustration grid
+           .grid      — 3×2 CSS grid of cells
+             .cell    — individual illustration slot
+
+   Flip behaviour:
+     .inner.flipped   — reverses flex-direction so card moves to
+                        the right and panel to the left.
+     Both children use transform+opacity transitions so the swap
+     animates smoothly instead of cutting.
+   ============================================================ */
+
+/* ── Outer coral frame ─────────────────────────────────────── */
+.frame {
+  position: fixed;
+  inset: 0;
+  outline: 14px solid var(--color-coral);
+  outline-offset: -14px;
+  background-color: var(--color-beige);
+  display: flex;
+  align-items: stretch;
+  overflow: auto;
+  z-index: 0;
+}
+
+/* ── Inner layout row ──────────────────────────────────────── */
+.inner {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100%;
+  padding: 14px;
+  /* transition the flex row reversal — children translate together */
+  transition: flex-direction 0s; /* direction itself can't animate */
+}
+
+/* Reversed: card on right, panel on left */
+.flipped {
+  flex-direction: row-reverse;
+}
+
+/* ── Left/right: white form card ───────────────────────────── */
+/* ── Left/right: white form card ───────────────────────────── */
+.card {
+  position: relative;
+  flex-shrink: 0;
+  width: 480px;
+  background-color: #FFFDF8;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(44, 36, 32, 0.12);
+  border-left: 4px solid var(--color-coral);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: var(--space-48) var(--space-40);
+  gap: var(--space-20);
+  align-self: stretch;
+  overflow-y: auto;
+  transition:
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity   300ms ease;
+}
+
+/* Binder hole punches on notebook card */
+.binderHoles {
+  position: absolute;
+  left: 8px;
+  top: 40px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.binderHole {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(44, 36, 32, 0.14);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Card header — logo */
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.logo {
+  font-family: var(--font-logo);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.logoDash {
+  font-weight: 300;
+  color: var(--color-coral);
+  margin-inline: 0.05em;
+}
+
+/* ── Illustration panel / Register SVG Showcase ────────────────── */
+.panel {
+  flex: 1;
+  position: relative;
+  background-color: var(--color-beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  overflow: hidden;
+  transition:
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity   300ms ease;
+}
+
+.panelSvgWrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.panelSvg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 48px rgba(44, 36, 32, 0.12));
+}
+
+/* Floating Physical Research Journal Canvas (No Outer Bounding Container) */
+.researchDesk {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main Open Notebook Sheet Floating in Space */
+.notebookSheet {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFDF8;
+  background-image:
+    linear-gradient(rgba(228, 103, 87, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(228, 103, 87, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(228, 103, 87, 0.18);
+  box-shadow:
+    0 32px 80px rgba(44, 36, 32, 0.18),
+    0 8px 28px rgba(228, 103, 87, 0.08);
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: visible;
+  transform: rotate(-0.5deg);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.notebookSheet:hover {
+  transform: rotate(0deg) scale(1.01);
+  box-shadow:
+    0 40px 96px rgba(44, 36, 32, 0.22),
+    0 12px 36px rgba(228, 103, 87, 0.12);
+}
+
+/* Silk Coral Bookmark Ribbon hanging out top edge */
+.bookmarkRibbon {
+  position: absolute;
+  top: -24px;
+  right: 80px;
+  width: 18px;
+  height: 80px;
+  background: var(--color-coral);
+  box-shadow: 0 4px 10px rgba(228, 103, 87, 0.3);
+  z-index: 5;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+  pointer-events: none;
+}
+
+/* Red Margin Rule & Binder Holes */
+.paperMargin {
+  position: absolute;
+  left: 52px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(228, 103, 87, 0.25);
+  pointer-events: none;
+}
+
+.coffeeStain {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 12px solid rgba(160, 92, 54, 0.07);
+  box-shadow: inset 0 0 20px rgba(160, 92, 54, 0.04);
+  pointer-events: none;
+}
+
+/* Notebook Header Area */
+.notebookHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(44, 36, 32, 0.08);
+  padding-bottom: 12px;
+  margin-left: 28px;
+}
+
+.notebookTag {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-coral-dark, #C94A3C);
+}
+
+.notebookTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+/* Taped Sticky Note with Masking Tape */
+.tapedNote {
+  position: absolute;
+  bottom: 36px;
+  left: 28px;
+  width: 230px;
+  background: #FFFDF0;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-left: 4px solid #D97706;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 14px 36px rgba(44, 36, 32, 0.12);
+  transform: rotate(-3deg);
+  transition: transform 220ms ease;
+  z-index: 3;
+}
+
+.tapedNote:hover {
+  transform: rotate(-1deg) scale(1.04);
+}
+
+.maskingTape {
+  position: absolute;
+  top: -10px;
+  left: 40px;
+  width: 70px;
+  height: 20px;
+  background: rgba(245, 235, 215, 0.75);
+  border: 1px solid rgba(210, 190, 160, 0.5);
+  transform: rotate(-2deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(2px);
+}
+
+.stickyText {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--color-text-dark);
+  line-height: 1.45;
+}
+
+.stickyAuthor {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-top: 8px;
+  display: block;
+}
+
+/* Clipping Spectrum Card held by Metallic Paperclip */
+.spectrumCard {
+  position: absolute;
+  top: 90px;
+  right: 28px;
+  width: 220px;
+  background: #FFFFFF;
+  border: 1px solid rgba(228, 103, 87, 0.2);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 16px 40px rgba(44, 36, 32, 0.10);
+  transform: rotate(2.5deg);
+  transition: transform 220ms ease;
+  z-index: 2;
+}
+
+.spectrumCard:hover {
+  transform: rotate(1deg) scale(1.03);
+}
+
+.paperclip {
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  width: 14px;
+  height: 32px;
+  border: 2.5px solid var(--color-coral);
+  border-radius: 10px;
+  z-index: 4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.spectrumTitle {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 6px;
+}
+
+.spectrumGraphSvg {
+  width: 100%;
+  height: 50px;
+  display: block;
+}
+
+/* Overlapping AI Protocol Log Card */
+.protocolCard {
+  position: absolute;
+  bottom: 60px;
+  right: 20px;
+  width: 290px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(228, 103, 87, 0.22);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 20px 48px rgba(44, 36, 32, 0.14);
+  transform: rotate(-1deg);
+  transition: transform 220ms ease;
+  z-index: 4;
+}
+
+.protocolCard:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.protocolHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.protocolBadge {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background: rgba(228, 103, 87, 0.12);
+  color: var(--color-coral);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.protocolTitle {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 6px;
+}
+
+.protocolFormula {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-coral-dark, #C94A3C);
+  background: rgba(201, 74, 60, 0.06);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Switching animation ───────────────────────────────────── */
+/* During the transition the inner content fades out, the flex
+   order reverses, then fades back in. We drive this with a
+   .switching class applied momentarily by JS.                 */
+.switching .card,
+.switching .panel {
+  opacity: 0;
+  /* card slides toward where it's going, panel away */
+}
+
+.switching .card  { transform: translateX(40px);  }
+.switching .panel { transform: translateX(-40px); }
+
+/* When flipped AND switching, directions reverse */
+.switching.flipped .card  { transform: translateX(-40px); }
+.switching.flipped .panel { transform: translateX(40px);  }
+
+/* ── 3×2 illustration grid ─────────────────────────────────── */
+.grid {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+  overflow: hidden;
+}
+
+.cell > * {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .panel {
+    display: none;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-40) var(--space-32);
+  }
+
+  /* No slide needed on mobile — panel is hidden */
+  .switching .card { transform: none; }
+}
+
+@media (max-width: 480px) {
+  .frame {
+    outline-width: 8px;
+    outline-offset: -8px;
+  }
+
+  .inner {
+    padding: 8px;
+  }
+
+  .card {
+    padding: var(--space-32) var(--space-20);
+    border-radius: var(--radius-md);
+  }
+}

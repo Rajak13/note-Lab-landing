@@ -1,0 +1,38 @@
+.breadcrumbBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 253, 248, 0.85);
+  border-bottom: 1px solid rgba(44, 36, 32, 0.06);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.item:hover {
+  color: var(--color-coral-dark, #C94A3C);
+}
+
+.itemActive {
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.separator {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  opacity: 0.6;
+}

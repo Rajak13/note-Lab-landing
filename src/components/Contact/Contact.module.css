@@ -1,0 +1,238 @@
+/* ─────────────────────────────────────────────────────────────────
+   Contact — beige background, notebook closing-page feel.
+   Two columns: illustration left, prose + contact right.
+   No "CONTACT US" poster. No boxes.
+───────────────────────────────────────────────────────────────── */
+
+.section {
+  background-color: var(--color-beige);
+  width: 100%;
+  font-family: var(--font-ui);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ── Two-column layout ── */
+.inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--space-40), 6vw, 96px);
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: clamp(var(--space-64), 8vw, 120px) var(--space-40);
+  box-sizing: border-box;
+}
+
+/* ── Left: illustration ── */
+.illoWrap {
+  flex: 0 0 clamp(300px, 44%, 510px);
+  max-width: 510px;
+}
+
+.illoSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Right: content ── */
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+/* Eyebrow — same pattern as all other sections */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-coral-text);
+  margin: 0;
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--color-coral-text);
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+/* ── Heading ── */
+.heading {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.headingLine {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  font-weight: 700;
+  color: var(--color-text-dark);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.headingAccent {
+  color: var(--color-coral);
+  font-style: italic;
+}
+
+.closingLine {
+  font-family: var(--font-ui);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: calc(-1 * var(--space-8)) 0 0;
+  max-width: 42ch;
+}
+
+/* ── Ruled notebook line ── */
+.ruledLine {
+  height: 1px;
+  background: var(--border-subtle);
+  width: 100%;
+  max-width: 380px;
+}
+
+/* ── Contact list — icon + link, no borders, clean ── */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.itemIcon {
+  flex-shrink: 0;
+  color: var(--color-coral);
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+}
+
+.itemLink {
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-block-end: 1px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.itemLink:hover {
+  color: var(--color-coral);
+  border-bottom-color: var(--color-coral);
+}
+
+.itemLink:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Handwritten sign-off — Caveat, same as dashboard SVG text ── */
+.signOff {
+  font-family: 'Caveat', cursive;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  opacity: 0.6;
+  margin: var(--space-8) 0 0;
+  letter-spacing: 0.01em;
+}
+
+/* ── Footer ── */
+.footer {
+  width: 100%;
+  background-color: #1a1a1a;
+  border-top: 2px solid var(--color-coral);
+  padding: var(--space-20) var(--space-40);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+/* Same restrained style as nav logo */
+.footerBrand {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(245, 237, 232, 0.9);
+  letter-spacing: -0.015em;
+}
+
+.footerDash {
+  color: var(--color-coral);
+  font-weight: 300;
+  margin-inline: 0.05em;
+}
+
+.footerCopy {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgba(245, 237, 232, 0.45);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .inner {
+    flex-direction: column;
+    padding: var(--space-48) var(--space-24) var(--space-40);
+    gap: var(--space-40);
+  }
+
+  .illoWrap {
+    flex: unset;
+    width: min(300px, 72vw);
+    margin-inline: auto;
+  }
+
+  .headingLine {
+    font-size: clamp(2.25rem, 8vw, 3.25rem);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-8);
+    text-align: center;
+    padding: var(--space-16) var(--space-24);
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    padding: var(--space-40) var(--space-16) var(--space-32);
+  }
+
+  .headingLine {
+    font-size: clamp(2rem, 9vw, 2.75rem);
+  }
+}

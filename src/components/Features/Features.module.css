@@ -1,0 +1,434 @@
+/* ─────────────────────────────────────────────────────────────────
+   Features — beige background.
+   Composition: ILLUSTRATION LEFT (dominant) · text right (compact).
+   Illustration column is wider than text column — product-shot scale.
+   Section is taller than About/Contact to create rhythm variation.
+───────────────────────────────────────────────────────────────── */
+
+.section {
+  position: relative;
+  background-color: var(--color-beige);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+  font-family: var(--font-ui);
+}
+
+/* ── Two-column layout — 7:5 split, illustration dominant ── */
+.inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  /* Generous vertical padding — section breathes */
+  padding: clamp(70px, 8vw, 120px) var(--space-40);
+  box-sizing: border-box;
+  /* Default: illustration left, text right */
+  flex-direction: row;
+  gap: clamp(var(--space-40), 6vw, 88px);
+}
+
+/* Illustration column — floating image */
+.illoWrap {
+  flex: 0 0 48%;
+  max-width: 600px;
+  position: relative;
+  filter: drop-shadow(0 20px 48px rgba(44, 36, 32, 0.12));
+  animation: floatImage 6s ease-in-out infinite;
+}
+
+@keyframes floatImage {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.illoSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Interactive Microscope Lens HUD ── */
+.protocolCard {
+  width: 100%;
+  max-width: 440px;
+  background: #FFFDF9;
+  border: 1px solid rgba(228, 103, 87, 0.18);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 48px rgba(44, 36, 32, 0.10),
+    0 4px 16px rgba(228, 103, 87, 0.08);
+  overflow: hidden;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.protocolCard:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 28px 60px rgba(44, 36, 32, 0.14),
+    0 8px 24px rgba(228, 103, 87, 0.14);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(228, 103, 87, 0.06);
+  border-bottom: 1px solid rgba(228, 103, 87, 0.12);
+}
+
+.cardDots {
+  display: flex;
+  gap: 6px;
+}
+
+.dotRed, .dotYellow, .dotGreen {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dotRed { background: #EF4444; }
+.dotYellow { background: #F59E0B; }
+.dotGreen { background: #10B981; }
+
+.cardTag {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-coral-text);
+  letter-spacing: 0.04em;
+}
+
+.cardBody {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.cardMeta {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.cardFormulaBox {
+  background: rgba(255, 252, 248, 0.9);
+  border-left: 3px solid var(--color-coral);
+  padding: 10px 14px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardFormula {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.cardFormulaYield {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--color-coral-text);
+  font-weight: 600;
+}
+
+.stepRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  color: var(--color-text-dark);
+}
+
+.stepBadgeDone {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #059669;
+  background: rgba(5, 150, 105, 0.10);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.stepBadgeActive {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-coral);
+  background: rgba(228, 103, 87, 0.10);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.stepText {
+  flex: 1;
+  line-height: 1.35;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid rgba(44, 36, 32, 0.08);
+  margin-top: 4px;
+}
+
+.aiTag {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-coral);
+}
+
+.timestamp {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.lensCrosshair::before, .lensCrosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(228, 103, 87, 0.5);
+}
+
+.lensCrosshair::before { top: 50%; left: 0; right: 0; height: 1px; }
+.lensCrosshair::after { left: 50%; top: 0; bottom: 0; width: 1px; }
+
+.lensParticles {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cellParticle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--color-coral);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: cellPulse 2s infinite ease-in-out alternate;
+}
+
+.cellParticle:nth-child(1) { top: 40%; left: 35%; animation-delay: 0ms; }
+.cellParticle:nth-child(2) { top: 55%; left: 55%; animation-delay: 400ms; width: 14px; height: 14px; }
+.cellParticle:nth-child(3) { top: 30%; left: 60%; animation-delay: 800ms; width: 8px; height: 8px; }
+
+@keyframes cellPulse {
+  0% { transform: scale(0.8); opacity: 0.4; }
+  100% { transform: scale(1.4); opacity: 0.9; }
+}
+
+.lensBadge {
+  position: absolute;
+  bottom: -32px;
+  background: rgba(44, 36, 32, 0.9);
+  color: #FFFDF9;
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.lensDot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-coral);
+  border-radius: 50%;
+  animation: dotPulse 1s infinite alternate;
+}
+
+@keyframes dotPulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Text column — compact, right */
+.left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  /* Less internal gap than About — feels more concentrated */
+  gap: var(--space-28, 1.75rem);
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-coral-text);
+  margin: 0;
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--color-coral-text);
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+/* ── Heading — smaller than hero, larger than body ── */
+.heading {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.headingLine {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 3.8vw, 3.25rem);
+  font-weight: 700;
+  color: var(--color-text-dark);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.headingAccent {
+  color: var(--color-coral);
+  font-style: italic;
+}
+
+/* ── Workflow story list ── */
+.workflowList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workflowStep {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: var(--space-14, 0.875rem);
+  align-items: start;
+  padding-block: var(--space-16);
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.workflowStep:last-child {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.stepNum {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  color: var(--color-coral-text);
+  opacity: 0.9;
+  padding-block-start: 2px;
+}
+
+.stepBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.stepDesc {
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 450;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 48ch;
+}
+
+/* Arrow connector between steps */
+.stepArrow {
+  grid-column: 2;
+  font-size: 1rem;
+  color: var(--color-coral);
+  opacity: 0.35;
+  line-height: 1;
+  margin-block-start: var(--space-4);
+  display: block;
+}
+
+/* ── CTA ── */
+.ctaWrap {
+  padding-block-start: var(--space-4);
+}
+
+/* ── Thin ruled section divider ── */
+.sectionDivider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* Hide old wave */
+.waveBottom { display: none; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .inner {
+    flex-direction: column;
+    padding: clamp(var(--space-48), 8vw, 80px) var(--space-24);
+    gap: var(--space-40);
+  }
+
+  .illoWrap {
+    flex: unset;
+    width: min(400px, 88vw);
+    margin-inline: auto;
+  }
+
+  .headingLine { font-size: clamp(2rem, 7vw, 3rem); }
+}
+
+@media (max-width: 480px) {
+  .inner { padding: var(--space-40) var(--space-16) var(--space-32); }
+  .headingLine { font-size: clamp(1.875rem, 8.5vw, 2.5rem); }
+  .workflowStep { grid-template-columns: 28px 1fr; gap: var(--space-10, 0.625rem); padding-block: var(--space-14, 0.875rem); }
+}

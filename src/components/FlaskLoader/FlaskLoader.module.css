@@ -1,0 +1,21 @@
+/* ============================================================
+   FlaskLoader.module.css
+   Minimal shell — sizing and centering is driven by the
+   `size` prop passed to the canvas element directly.
+   The wrapper just prevents layout collapse and centres the
+   canvas inside whatever container the caller provides.
+   ============================================================ */
+.wrapper {
+  /* Inline size is set via style prop from the component */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.canvas {
+  display: block;
+  /* Let the JS-controlled style.width / style.height own sizing */
+  width: 100%;
+  height: 100%;
+}

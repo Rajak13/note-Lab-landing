@@ -1,0 +1,182 @@
+/* ============================================================
+   AuthPage.module.css
+   Animation and style rules specific to the AuthPage controller.
+   ============================================================ */
+
+/* ── Form content crossfade ────────────────────────────────── */
+/* Wraps the entire form (heading + fields + footer).
+   Fades out before the layout flips, fades back in after.     */
+.formContent {
+  display: contents; /* transparent wrapper — doesn't affect flex layout */
+}
+
+/* Separate animating wrapper used when we need opacity/transform */
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  width: 100%;
+  transition:
+    opacity   260ms ease,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.formHidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.formVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Switch link styled as an inline text button ───────────── */
+/* Used for "Sign Up" / "Log in" in the footer paragraph.      */
+.switchBtn {
+  display: inline;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-coral);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease;
+  line-height: inherit;
+}
+
+.switchBtn:hover {
+  border-bottom-color: var(--color-coral);
+}
+
+.switchBtn:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Reset Password text button ─────────────────────────────── */
+.textBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-coral);
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease;
+}
+
+.textBtn:hover {
+  border-bottom-color: var(--color-coral);
+}
+
+.textBtn:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .formContent {
+    transition: none;
+  }
+  .formHidden {
+    transform: none;
+  }
+}
+
+/* ── Lab-themed decorations ─────────────────────────────────── */
+.labDecoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floatingAtom1,
+.floatingAtom2 {
+  position: absolute;
+  opacity: 0.1;
+}
+
+.floatingAtom1 {
+  top: 15%;
+  left: 10%;
+  animation: floatAtom1 6s ease-in-out infinite;
+}
+
+.floatingAtom2 {
+  bottom: 20%;
+  right: 15%;
+  animation: floatAtom2 8s ease-in-out infinite;
+}
+
+.flaskDecoration,
+.testTubeDecoration {
+  position: absolute;
+  opacity: 0.08;
+}
+
+.flaskDecoration {
+  bottom: 10%;
+  left: 10%;
+  animation: floatFlask 10s ease-in-out infinite;
+}
+
+.testTubeDecoration {
+  bottom: 15%;
+  right: 10%;
+  animation: floatTestTube 12s ease-in-out infinite;
+}
+
+.scientificEq {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.03;
+  font-family: var(--font-display);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.equation {
+  color: var(--color-coral-dark);
+  letter-spacing: 0.05em;
+}
+
+@keyframes floatAtom1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(15px, -10px) rotate(15deg); }
+}
+
+@keyframes floatAtom2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-12px, 15px) rotate(-10deg); }
+}
+
+@keyframes floatFlask {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(8px, -5px) rotate(3deg); }
+}
+
+@keyframes floatTestTube {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-6px, 8px) rotate(-2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .labDecoration * {
+    animation: none !important;
+  }
+}

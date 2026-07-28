@@ -1,0 +1,352 @@
+.ledgerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 48px;
+}
+
+.ledgerBanner {
+  background: #FFFDF8;
+  border: 1px solid rgba(44, 36, 32, 0.14);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(44, 36, 32, 0.05);
+  position: relative;
+}
+
+.bannerMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.stampedTag {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-coral, #E46757);
+  background: rgba(228, 103, 87, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.catalogCode {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #786C66);
+}
+
+.ledgerHeading {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-dark, #2C2420);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px 0;
+}
+
+.ledgerSubheading {
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #50443E);
+  margin: 0;
+}
+
+/* ── 3 Key Research Calibration Metrics ── */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.metricCard {
+  background: #FFFDF8;
+  border: 1px solid rgba(44, 36, 32, 0.12);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(44, 36, 32, 0.04);
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.metricIconWrap {
+  background: rgba(44, 36, 32, 0.04);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metricLabel {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted, #786C66);
+}
+
+.metricBody {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.metricNumber {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--color-text-dark, #2C2420);
+}
+
+.metricUnit {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary, #50443E);
+}
+
+.metricFooter {
+  border-top: 1px dashed rgba(44, 36, 32, 0.1);
+  padding-top: 8px;
+}
+
+.verifiedBadge {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent-teal, #059669);
+}
+
+/* ── Journal Spread Layout ── */
+.journalSpread {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .journalSpread {
+    grid-template-columns: 1fr;
+  }
+}
+
+.journalSection {
+  background: #FFFDF8;
+  border: 1px solid rgba(44, 36, 32, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(44, 36, 32, 0.04);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(44, 36, 32, 0.08);
+  padding-bottom: 10px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text-dark, #2C2420);
+  margin: 0;
+}
+
+.sectionRef {
+  font-family: monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-coral, #E46757);
+}
+
+/* ── Glassware Tube Chart ── */
+.chartContainer {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 160px;
+  padding-left: 40px;
+}
+
+.graduationLines {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted, #786C66);
+}
+
+.tubesRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+}
+
+.tubeCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+}
+
+.tubeTrack {
+  width: 24px;
+  flex: 1;
+  background: rgba(44, 36, 32, 0.05);
+  border: 1px solid rgba(44, 36, 32, 0.15);
+  border-radius: 12px 12px 4px 4px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  position: relative;
+}
+
+.tubeFill {
+  width: 100%;
+  background: var(--color-coral, #E46757);
+  border-radius: 0 0 4px 4px;
+  transition: height 300ms ease;
+}
+
+.tubeVal {
+  font-family: monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-coral, #E46757);
+}
+
+.tubeDay {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-text-muted, #786C66);
+}
+
+/* ── Discipline Breakdown ── */
+.disciplineList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.disciplineRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.disciplineMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-size: 0.84375rem;
+}
+
+.disciplineName {
+  font-weight: 600;
+  color: var(--color-text-dark, #2C2420);
+}
+
+.disciplineCount {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #786C66);
+}
+
+.ruleTrack {
+  height: 6px;
+  background: rgba(44, 36, 32, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ruleFill {
+  height: 100%;
+  background: var(--color-coral, #E46757);
+  border-radius: 4px;
+}
+
+/* ── Audit Table Log ── */
+.logTable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px 14px;
+  background: rgba(44, 36, 32, 0.03);
+  border: 1px solid rgba(44, 36, 32, 0.06);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+}
+
+.logTagCell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 130px;
+}
+
+.logTagText {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-dark, #2C2420);
+}
+
+.logDetailsCell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logSubject {
+  font-size: 0.875rem;
+  color: var(--color-text-dark, #2C2420);
+}
+
+.logDesc {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary, #50443E);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.logTimeCell {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #786C66);
+  white-space: nowrap;
+}

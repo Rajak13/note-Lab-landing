@@ -1,0 +1,43 @@
+/* ============================================================
+   animations.module.css
+   Scroll-reveal classes that mirror Hero's fadeUp animation.
+   Uses the same keyframes, duration token, and easing token
+   so all section reveals share an identical motion language.
+   ============================================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base hidden state — element sits at full opacity in the DOM
+   but visually invisible before the observer fires.            */
+.reveal {
+  opacity: 0;
+  /* No transform here — the keyframe owns the transform so
+     there is no flash of translated content before JS runs.   */
+}
+
+/* Applied by React when isVisible becomes true.
+   animation-delay is set via inline style per element for stagger. */
+.revealVisible {
+  animation: fadeUp var(--duration-base, 500ms) var(--ease-out-expo, cubic-bezier(0.22, 1, 0.36, 1)) both;
+}
+
+/* Honour prefers-reduced-motion — skip animation entirely.
+   The hook already sets isVisible immediately, but this ensures
+   no flash even if CSS loads before JS.                        */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .revealVisible {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}
