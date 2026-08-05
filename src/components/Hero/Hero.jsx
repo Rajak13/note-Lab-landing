@@ -294,6 +294,10 @@ export default function Hero() {
               alt="NoteLab dashboard interface preview"
               className={s.screenshotImg}
               draggable="false"
+              fetchPriority="high"
+              decoding="async"
+              width="1200"
+              height="675"
             />
           </div>
         </div>

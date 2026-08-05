@@ -47,6 +47,8 @@ export default function AuthLayout({
               alt={illustrationAlt}
               className={s.panelSvg}
               draggable="false"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </aside>

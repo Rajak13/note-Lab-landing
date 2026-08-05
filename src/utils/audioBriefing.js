@@ -60,22 +60,54 @@ export function playSmartAudioBriefing(script, onStart, onEnd, onError) {
 
   window.speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(script);
-  utterance.rate = 0.92;
-  utterance.pitch = 1.05;
-  utterance.lang = 'en-US';
+  const speakWithVoice = () => {
+    const utterance = new SpeechSynthesisUtterance(script);
+    utterance.rate = 0.92;
+    utterance.pitch = 1.02;
+    utterance.lang = 'en-US';
 
-  utterance.onend = () => onEnd && onEnd();
-  utterance.onerror = () => onError && onError('Audio playback error');
+    utterance.onend = () => onEnd && onEnd();
+    utterance.onerror = (e) => {
+      console.warn('SpeechSynthesis error event:', e);
+      onError && onError('Audio playback error');
+    };
 
-  // Select warm natural human voice
-  const voices = window.speechSynthesis.getVoices();
-  if (voices && voices.length > 0) {
-    const preferredNames = ['Samantha', 'Karen', 'Serena', 'Victoria', 'Moira', 'Fiona', 'Daniel', 'Natural', 'Google US English'];
-    const humanVoice = voices.find((v) => preferredNames.some((name) => v.name.includes(name))) || voices.find((v) => v.lang.includes('en')) || voices[0];
-    if (humanVoice) utterance.voice = humanVoice;
+    const allVoices = window.speechSynthesis.getVoices();
+    if (allVoices && allVoices.length > 0) {
+      // Prioritize natural/enhanced/premium human voices
+      const premiumNames = [
+        'Google US English', 'Google UK English Female', 'Samantha', 'Karen',
+        'Serena', 'Victoria', 'Ava (Premium)', 'Samantha (Enhanced)',
+        'Karen (Enhanced)', 'Daniel', 'Fiona', 'Moira', 'Natural'
+      ];
+
+      const chosenVoice =
+        allVoices.find((v) => premiumNames.some((pName) => v.name.includes(pName))) ||
+        allVoices.find((v) => v.lang.startsWith('en') && !v.name.toLowerCase().includes('compact')) ||
+        allVoices.find((v) => v.lang.startsWith('en')) ||
+        allVoices[0];
+
+      if (chosenVoice) {
+        utterance.voice = chosenVoice;
+      }
+    }
+
+    window.speechSynthesis.speak(utterance);
+    if (onStart) onStart();
+  };
+
+  // Check if voices are loaded or wait for onvoiceschanged
+  const currentVoices = window.speechSynthesis.getVoices();
+  if (currentVoices && currentVoices.length > 0) {
+    speakWithVoice();
+  } else {
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.onvoiceschanged = null;
+      speakWithVoice();
+    };
+    // Fallback timer if onvoiceschanged doesn't fire
+    setTimeout(() => {
+      speakWithVoice();
+    }, 150);
   }
-
-  window.speechSynthesis.speak(utterance);
-  if (onStart) onStart();
 }

@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './StatsGrid.module.css';
 import { StudyJourneyConstellation, StudyProgressArc, SectionDividerMotif } from './DashboardIllustrations';
 import { SparklesIcon } from './EducationalSVG';
+import { getApiUrl } from '../../config/api';
 import { buildSmartAudioScript, playSmartAudioBriefing } from '../../utils/audioBriefing';
 
 export default function StatsGrid({ experiments = [] }) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const audioRef = useRef(null);
+
+  const stopAllAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      stopAllAudio();
+    };
+  }, []);
 
   const activeExp = experiments.length > 0 ? experiments[0] : null;
   const title = activeExp?.title || 'Research Protocols & Analysis';
@@ -14,17 +33,14 @@ export default function StatsGrid({ experiments = [] }) {
 
   const totalExps = experiments.length;
 
-  const handleToggleAudio = () => {
-    if (!('speechSynthesis' in window)) {
-      alert('Speech synthesis is not supported in this browser.');
-      return;
-    }
-
+  const handleToggleAudio = async () => {
     if (isPlayingAudio) {
-      window.speechSynthesis.cancel();
+      stopAllAudio();
       setIsPlayingAudio(false);
       return;
     }
+
+    stopAllAudio();
 
     let parsedBlocks = [];
     try {
@@ -39,6 +55,43 @@ export default function StatsGrid({ experiments = [] }) {
       activeExp?.aiInsight,
       parsedBlocks
     );
+
+    const savedKey = localStorage.getItem('notelab_tts_key');
+    const savedService = localStorage.getItem('notelab_tts_service') || 'elevenlabs';
+    const savedVoice = localStorage.getItem('notelab_tts_voice') || 'cgSgspJ2msm6clMCkdW9';
+
+    if (savedKey) {
+      try {
+        const res = await fetch(getApiUrl('/api/tts/speak'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-api-key': savedKey },
+          body: JSON.stringify({ text: script, service: savedService, voiceId: savedVoice })
+        });
+
+        const contentType = res.headers.get('content-type') || '';
+        if (res.ok && contentType.includes('audio')) {
+          const blob = await res.blob();
+          const audioUrl = URL.createObjectURL(blob);
+          const audio = new Audio(audioUrl);
+          audioRef.current = audio;
+
+          audio.onended = () => {
+            setIsPlayingAudio(false);
+            audioRef.current = null;
+          };
+          audio.onerror = () => {
+            setIsPlayingAudio(false);
+            audioRef.current = null;
+          };
+
+          await audio.play();
+          setIsPlayingAudio(true);
+          return;
+        }
+      } catch (err) {
+        console.warn('Neural TTS fetch error, fallback active');
+      }
+    }
 
     playSmartAudioBriefing(
       script,

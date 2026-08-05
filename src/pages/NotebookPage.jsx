@@ -5,6 +5,7 @@ import { getApiUrl } from '../config/api';
 import BlockEditor from '../components/BlockEditor/BlockEditor';
 import DiagramCanvas from '../components/DiagramCanvas/DiagramCanvas';
 import AIDrawer from '../components/AI/AIDrawer';
+import VoiceKeyModal from '../components/Dashboard/VoiceKeyModal';
 import styles from './NotebookPage.module.css';
 import { buildSmartAudioScript, playSmartAudioBriefing } from '../utils/audioBriefing';
 
@@ -79,19 +80,34 @@ export default function NotebookPage() {
   const [activeView, setActiveView] = useState('notes'); // 'notes' | 'diagram'
   const [isAIOpen, setIsAIOpen] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const audioRef = useRef(null);
 
-  const handleToggleAudioSummary = () => {
-    if (!('speechSynthesis' in window)) {
-      toast.error('Browser audio speech engine not supported');
-      return;
+  const stopAllAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
     }
-
-    if (isPlayingAudio) {
+    if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      stopAllAudio();
+    };
+  }, []);
+
+  const handleToggleAudioSummary = async () => {
+    if (isPlayingAudio) {
+      stopAllAudio();
       setIsPlayingAudio(false);
       toast.info('Audio briefing paused');
       return;
     }
+
+    stopAllAudio();
 
     const script = buildSmartAudioScript(
       titleValue,
@@ -102,16 +118,52 @@ export default function NotebookPage() {
       blocks
     );
 
+    const savedKey = localStorage.getItem('notelab_tts_key');
+    const savedService = localStorage.getItem('notelab_tts_service') || 'elevenlabs';
+    const savedVoice = localStorage.getItem('notelab_tts_voice') || 'cgSgspJ2msm6clMCkdW9';
+
+    if (savedKey) {
+      try {
+        const res = await fetch(getApiUrl('/api/tts/speak'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-api-key': savedKey },
+          body: JSON.stringify({ text: script, service: savedService, voiceId: savedVoice })
+        });
+
+        const contentType = res.headers.get('content-type') || '';
+        if (res.ok && contentType.includes('audio')) {
+          const blob = await res.blob();
+          const audioUrl = URL.createObjectURL(blob);
+          const audio = new Audio(audioUrl);
+          audioRef.current = audio;
+
+          audio.onended = () => {
+            setIsPlayingAudio(false);
+            audioRef.current = null;
+          };
+          audio.onerror = () => {
+            setIsPlayingAudio(false);
+            audioRef.current = null;
+          };
+
+          await audio.play();
+          setIsPlayingAudio(true);
+          toast.success('Playing studio neural voice 🎧', 'Studio TTS Active');
+          return;
+        }
+      } catch (err) {
+        console.warn('Neural TTS fetch failed, using fallback voice engine');
+      }
+    }
+
     playSmartAudioBriefing(
       script,
       () => {
         setIsPlayingAudio(true);
-        toast.success('Playing Executive AI Audio Briefing 🎧', 'AI Voice Briefing');
+        toast.success('Playing executive AI audio summary 🎧', 'AI Voice Briefing');
       },
-      () => setIsPlayingAudio(false),
-      (err) => {
+      () => {
         setIsPlayingAudio(false);
-        toast.error(err);
       }
     );
   };

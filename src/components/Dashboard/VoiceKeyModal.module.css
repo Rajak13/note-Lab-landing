@@ -1,0 +1,142 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 36, 32, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modalCard {
+  background: #FFFDF8;
+  border: 1px solid rgba(228, 103, 87, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 16px 40px rgba(44, 36, 32, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: var(--font-ui);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(44, 36, 32, 0.08);
+  padding-bottom: 12px;
+}
+
+.modalTitle {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-dark, #2C2420);
+  margin: 0 0 4px 0;
+}
+
+.modalSubtitle {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted, #786C66);
+  margin: 0;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-muted, #786C66);
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-dark, #2C2420);
+}
+
+.radioRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84375rem;
+  color: var(--color-text-dark, #2C2420);
+  cursor: pointer;
+}
+
+.input, .select {
+  background: #FFF;
+  border: 1px solid rgba(44, 36, 32, 0.14);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  color: var(--color-text-dark, #2C2420);
+  outline: none;
+}
+
+.input:focus, .select:focus {
+  border-color: var(--color-coral, #E46757);
+}
+
+.hintText {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #786C66);
+}
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid rgba(44, 36, 32, 0.08);
+  padding-top: 14px;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid rgba(44, 36, 32, 0.12);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-dark, #2C2420);
+  cursor: pointer;
+}
+
+.saveBtn {
+  background: var(--color-coral, #E46757);
+  color: #FFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(228, 103, 87, 0.25);
+}

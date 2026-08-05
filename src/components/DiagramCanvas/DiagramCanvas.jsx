@@ -487,6 +487,33 @@ export default function DiagramCanvas({ initialJson, onChange }) {
   const selectedEdge = selection.type === 'edge' ? edges.find((e) => e.id === selection.id) : null;
   const selectedDictShape = selectedNode ? LAB_APPARATUS[selectedNode.shape] : null;
 
+  const handleTouchStart = (e) => {
+    if (e.touches && e.touches[0]) {
+      const touch = e.touches[0];
+      handleSvgMouseDown({
+        clientX: touch.clientX,
+        clientY: touch.clientY,
+        stopPropagation: () => e.stopPropagation?.(),
+        preventDefault: () => e.preventDefault?.(),
+        target: e.target,
+      });
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (e.touches && e.touches[0]) {
+      const touch = e.touches[0];
+      handleSvgMouseMove({
+        clientX: touch.clientX,
+        clientY: touch.clientY,
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    handleSvgMouseUp();
+  };
+
   return (
     <div className={styles.drawioLayout}>
       {/* ── Draw.io Top Action & Preset Bar ── */}
@@ -639,7 +666,11 @@ export default function DiagramCanvas({ initialJson, onChange }) {
             onMouseDown={handleSvgMouseDown}
             onMouseMove={handleSvgMouseMove}
             onMouseUp={handleSvgMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
             onClick={handleCanvasClick}
+            style={{ touchAction: 'none' }}
           >
             <defs>
               <pattern id="dotgrid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">

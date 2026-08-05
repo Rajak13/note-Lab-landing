@@ -15,7 +15,7 @@ import BreadcrumbBar from '../components/Dashboard/BreadcrumbBar';
 import FolderInspectorPanel from '../components/Dashboard/FolderInspectorPanel';
 import WorkspaceView from '../components/Dashboard/WorkspaceView';
 import NotebookShelfView from '../components/Dashboard/NotebookShelfView';
-import StudyActivityView from '../components/Dashboard/StudyActivityView';
+import VoiceKeyModal from '../components/Dashboard/VoiceKeyModal';
 import { FloatingAtomDecor } from '../components/Dashboard/DashboardIllustrations';
 import { getApiUrl } from '../config/api';
 
@@ -26,6 +26,7 @@ export default function DashboardPage() {
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('Overview');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem('notelab-theme') || 'light');
 
   const navigate = useNavigate();
